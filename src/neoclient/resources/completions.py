@@ -12,6 +12,7 @@ class Completions:
                max_tokens: Optional[int]=1024,
                temperature: Optional[float]=1.0,
                top_p: Optional[float]=1.0,
+               ignore_eos: Optional[bool]=False,
         ) -> Completion:
         """
         Generates a text completion for the given prompt using the specified model.
@@ -36,6 +37,9 @@ class Completions:
 
                 Note: It is generally recommended to adjust either `top_p` or `temperature`, but not both.
 
+            ignore_eos (Optional[bool]): Makes the request not stop while finding an end of sequence token.
+                I.e., the model keeps genearating tokens until it generates max_tokens.
+
         Returns:
             Completion: An object representing the model's response, including the generated choices,
             usage details, and metadata such as the response ID and creation time.
@@ -56,6 +60,8 @@ class Completions:
             "temperature": temperature,
             "top_p": top_p,
         }
+        if ignore_eos:
+            payload["ignore_eos"] = ignore_eos
         response = self.client._post("v1/completions", payload)
         choices = [CompletionChoice(**choice) for choice in response.get("choices", [])]
         usage = Usage(**response.get("usage", {}))
