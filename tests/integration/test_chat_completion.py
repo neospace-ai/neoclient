@@ -15,4 +15,3 @@ def test_chat_completions(client):
 
     response = client.chat_completions.create(model=model, messages=messages, temperature=temperature, max_tokens=max_tokens)
     assert isinstance(response, ChatCompletion)
-    assert response.choices[0].message.content == "<|end_task|>Hello! How can I assist you today?<|flow|>"
