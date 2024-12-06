@@ -1,2 +1,3 @@
 from .chat_completions import ChatCompletions
 from .completions import Completions
+from .supervisor_completions import SupervisorCompletions

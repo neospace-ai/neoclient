@@ -3,7 +3,7 @@ import requests
 
 from dotenv import load_dotenv
 from typing import Dict
-from neoclient.resources import ChatCompletions, Completions
+from neoclient.resources import ChatCompletions, Completions, SupervisorCompletions
 
 load_dotenv()
 
@@ -21,7 +21,7 @@ class Neoclient:
             raise ValueError("NEOINFER_URL and NEOINFER_API_KEY must be set as arguments or environment variables")
         self.completions = Completions(self)
         self.chat_completions = ChatCompletions(self)
-
+        self.supervisor_completions = SupervisorCompletions(self)
 
     def _post(self, endpoint: str, payload: Dict):
         headers = {"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json"}
