@@ -4,3 +4,5 @@ from .completion import Completion
 from .chat_message import ChatMessage
 from .chat_completion_choice import ChatCompletionChoice
 from .chat_completion import ChatCompletion
+from .supervisor_choice import SupervisorChoice
+from .supervisor import Supervisor
